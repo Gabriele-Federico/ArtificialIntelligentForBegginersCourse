@@ -27,7 +27,6 @@ public class MapLocation
             return false;
         else
             return x == ((MapLocation)obj).x && z == ((MapLocation)obj).z;
-
     }
 
     public override int GetHashCode()

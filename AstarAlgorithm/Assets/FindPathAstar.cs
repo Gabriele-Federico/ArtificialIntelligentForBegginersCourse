@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PathMarker
 {
@@ -15,7 +16,7 @@ public class PathMarker
     {
         location = l;
         G = g;
-        H = g;
+        H = h;
         F = f;
         this.marker = marker;
         parent = p;
@@ -25,9 +26,8 @@ public class PathMarker
     {
         if (obj == null || !this.GetType().Equals(obj.GetType()))
             return false;
-        else
-            return location.Equals(((PathMarker)obj).location);
 
+        return location == ((PathMarker)obj).location;
     }
 
     public override int GetHashCode()
@@ -35,7 +35,7 @@ public class PathMarker
         return base.GetHashCode();
     }
 }
-}
+
 
 public class FindPathAstar : MonoBehaviour
 {
