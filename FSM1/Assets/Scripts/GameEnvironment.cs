@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameEnvironment : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GameEnvironment : MonoBehaviour
             {
                 istance = new GameEnvironment();
                 istance.Checkpoints.AddRange(GameObject.FindGameObjectsWithTag("Checkpoint"));
+
+                istance.checkpoints = istance.checkpoints.OrderBy(waypoint => waypoint.name).ToList();
             }
             return istance;
         }
