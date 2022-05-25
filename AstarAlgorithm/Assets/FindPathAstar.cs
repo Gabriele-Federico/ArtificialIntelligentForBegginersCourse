@@ -27,12 +27,12 @@ public class PathMarker
         if (obj == null || !this.GetType().Equals(obj.GetType()))
             return false;
 
-        return location == ((PathMarker)obj).location;
+        return location.Equals(((PathMarker)obj).location);
     }
 
     public override int GetHashCode()
     {
-        return base.GetHashCode();
+        return 0;
     }
 }
 
@@ -83,7 +83,7 @@ public class FindPathAstar : MonoBehaviour
                                         Instantiate(start, startLocation, Quaternion.identity), null);
 
         Vector3 goalLocation = new Vector3(locations[1].x * maze.scale, 0, locations[1].z * maze.scale);
-        startNode = new PathMarker(new MapLocation(locations[1].x, locations[1].z), 0, 0, 0,
+        goalNode = new PathMarker(new MapLocation(locations[1].x, locations[1].z), 0, 0, 0,
                                         Instantiate(end, goalLocation, Quaternion.identity), null);
 
         open.Clear();
@@ -95,6 +95,7 @@ public class FindPathAstar : MonoBehaviour
 
     private void Search(PathMarker thisNode)
     {
+
         if (thisNode.Equals(goalNode))
         {
             done = true;
@@ -107,7 +108,7 @@ public class FindPathAstar : MonoBehaviour
             if (maze.map[neighbour.x, neighbour.z] == 1) continue;
             if ((neighbour.x < 1 || neighbour.x >= maze.width) && (neighbour.z < 1 || neighbour.z >= maze.depth)) continue;
             if (IsClosed(neighbour)) continue;
-
+            
             float G = Vector2.Distance(thisNode.location.ToVector(), neighbour.ToVector()) + thisNode.G;
             float H = Vector2.Distance(neighbour.ToVector(), goalNode.location.ToVector());
             float F = G + H;
@@ -165,10 +166,22 @@ public class FindPathAstar : MonoBehaviour
         
     }
 
+    private void GetPath()
+    {
+        RemoveAllMarkers();
+        PathMarker current = lastPos;
+        while(current != null)
+        {
+            Instantiate(pathP, new Vector3(current.location.x * maze.scale, 0, current.location.z * maze.scale), Quaternion.identity);
+            current = current.parent;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P)) BeginSearch();
-        if (Input.GetKeyDown(KeyCode.F)) Search(lastPos);
+        if (Input.GetKeyDown(KeyCode.F) && !done) Search(lastPos);
+        if (Input.GetKeyDown(KeyCode.M) && done) GetPath();
     }
 }
