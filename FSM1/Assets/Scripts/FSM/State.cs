@@ -7,7 +7,7 @@ public class State
 {
     public enum STATE
     {
-        IDLE, PATROL, PURSUE, ATTACK, SLEEP
+        IDLE, PATROL, PURSUE, ATTACK, SLEEP, RUNAWAY
     };
 
     public enum EVENT
@@ -51,5 +51,28 @@ public class State
         }
 
         return this;
+    }
+
+    public bool CanSeePlayer()
+    {
+        Vector3 directionFromPlayer = player.position - npc.transform.position;
+        float angle = Vector3.Angle(directionFromPlayer, npc.transform.forward);
+
+        return (directionFromPlayer.magnitude < visDist && angle < visAngle);
+    }
+
+    public bool CanAttackPlayer()
+    {
+        Vector3 directionFromPlayer = player.position - npc.transform.position;
+
+        return (directionFromPlayer.magnitude < shootDist);
+    }
+
+    public bool IsPlayerBehind()
+    {
+        Vector3 directionFromPlayer = npc.transform.position - player.position;
+        float angle = Vector3.Angle(directionFromPlayer, npc.transform.forward);
+
+        return (directionFromPlayer.magnitude < 2 && angle < 30);
     }
 }
