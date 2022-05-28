@@ -38,10 +38,12 @@ public abstract class GAction : MonoBehaviour
                 preconditions.Add(w.key, w.value);
             }
         if (afterEffects != null)
+        {
             foreach (WorldState w in afterEffects)
             {
                 effects.Add(w.key, w.value);
             }
+        }
 
     }
 
