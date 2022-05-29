@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoToWaitingRoom : GAction
+public class GoHome : GAction
 {
     public override bool PrePerform()
     {
@@ -11,9 +11,7 @@ public class GoToWaitingRoom : GAction
 
     public override bool PostPerform()
     {
-        beliefs.ModifyState("atHospital", 1);
-        GWorld.Instance.GetWorld().ModifyState("Waiting", 1);
-        GWorld.Instance.AddPatient(gameObject);
+        Destroy(gameObject);
         return true;
     }
 }

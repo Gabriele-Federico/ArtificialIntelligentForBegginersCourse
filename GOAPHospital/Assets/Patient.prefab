@@ -1411,6 +1411,8 @@ GameObject:
   - component: {fileID: 4533654762899662822}
   - component: {fileID: 4533654762899662821}
   - component: {fileID: 7559413728475170598}
+  - component: {fileID: 1942884276}
+  - component: {fileID: 792618435918221681}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -1529,7 +1531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e7e1f182f1685459e5f15189303b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: Action
+  actionName: Register
   cost: 1
   target: {fileID: 0}
   targetTag: Reception
@@ -1555,6 +1557,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisAgent: {fileID: 4533654762899662816}
+--- !u!114 &1942884276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6019917607201985991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb66e9a8453d3540b8c88b9e14d8dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GetTreated
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 5
+  preConditions:
+  - key: atHospital
+    value: 0
+  afterEffects:
+  - key: isTreated
+    value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &792618435918221681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6019917607201985991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5f7c7d6a7df1f44bea0754db79a999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Go Home
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Home
+  duration: 0
+  preConditions:
+  - key: isTreated
+    value: 0
+  afterEffects:
+  - key: isHome
+    value: 0
+  agent: {fileID: 0}
+  running: 0
 --- !u!1 &6411775980519840504
 GameObject:
   m_ObjectHideFlags: 0

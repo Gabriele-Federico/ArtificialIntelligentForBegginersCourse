@@ -11,7 +11,7 @@ public class SpawnPatients : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("SpawnPatient", 5);
+        Invoke("SpawnPatient", 10);
     }
 
     void SpawnPatient()
